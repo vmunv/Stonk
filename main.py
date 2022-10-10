@@ -1,3 +1,3 @@
 from grabData import *
 
-print(getStock("MSFT"))
+print(getStockHistory("MSFT"))
