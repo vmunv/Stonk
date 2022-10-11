@@ -12,7 +12,6 @@ def ddmSumPrice(stock):
     stockValue += expectedDividend(stock, i)/(1+r)**i
   return stockValue
 
-
 def ddmBasicPrice(stock):
   perShareDividend = stock['dividend']/stock['numShares']
   r = requiredReturnOnCommonStock(stock)
