@@ -1,6 +1,9 @@
+import polygon.rest.models.indicators
 
 
-def analysis(rsi, macd, signal):
-  if rsi < 20:
+
+def analysis(ticker):
+  SMAIndictor()
+  
     
   

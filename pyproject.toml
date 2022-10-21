@@ -12,6 +12,8 @@ Flask = "^2.2.0"
 urllib3 = "^1.26.12"
 yfinance = "^0.1.77"
 sklearn = "^0.0"
+polygon = "^1.1.0"
+matplotlib = "^3.6.1"
 
 [tool.poetry.dev-dependencies]
 debugpy = "^1.6.2"

@@ -1,32 +1,32 @@
-class Option:
-  def __init__(self, type, strike,premium):
-    self.strike = strike
-    self.type = type
-    self.premium = premium
-  
-  #x is price
-  def profitCurve(self, x):
-    if self.type == "call":
-      if (x - self.strike - self.premium) > -1*self.premium:
-        return x - self.strike - self.premium
-      else:
-        return -1*self.premium
-    elif self.type == "put":
-      if self.strike - x - self.premium > -1*self.premium:
-        return self.strike - x - self.premium
-      else:
-        return -1*self.premium
+import matplotlib.pyplot as plt
 
-def strangleVisualization(call, put):
-  totalPremium = call.premium+put.premium
+
+#call/put are option objects
+#start/end are integers
+def strangleVisualization(call, put, start, end):
+  if call.ticker != put.ticker:
+    raise Exception("Ticker for call and put are different")
+  totalPremium = call.premium + put.premium
   print("\n")
   print("callStrike: ", call.strike, " putStrike: ", put.strike)
   print("callPremium: ", call.premium, " putPremium: ", put.premium)
-  print("Profit range: [0,", put.strike-totalPremium, "), (", call.strike+totalPremium ,", infty)")
-  for e in [49,50,51,52,53,54,55,56,57,58,59,60,61]:
-    print("Profit for price ", e, ": ", call.profitCurve(e) + put.profitCurve(e))
+  print("Profit range: [0,", put.strike - totalPremium, "), (",
+        call.strike + totalPremium, ", infty)")
+  stockPrices = []
+  profits = []
+  i = start
+  while i <= end:
+    stockPrices.append(i)
+    profits.append(call.profitCurve(i) + put.profitCurve(i))
+    i += 0.5
+    #print("Profit for price ", i, ": ", call.profitCurve(i) + put.profitCurve(i))
+  plt.title("Strangle on " + call.ticker + "\nCall: (" + str(call.strike) +
+            "," + str(call.premium) + ")\nPut: (" + str(put.strike) + "," +
+            str(put.premium) + ")")
+  plt.plot(stockPrices, profits)
+  plt.xlabel("Stock price ($)")
+  plt.ylabel("Profit ($)")
+  plt.show()
 
 
 #x is the premium price
-
-

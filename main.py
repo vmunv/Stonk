@@ -2,10 +2,29 @@ from grabData import *
 from dividendDiscountModel import *
 from dividendDiscountModelRater import *
 from optionsVisualization import *
+from optionClass import *
 
-JPM = {'dividend' : 4*3.027*10**9, 'netIncome' : 46.503*10**9, 'numShares': 3.027*10**9, 'divRate' : .111, 'startEquity' : 279.354*10**9, 'endEquity' : 294.127*10**9, 'price' : 158.35, 'hist' : [0.9,0.9,0.9,0.9,0.9,0.9,0.9,1,1,1,1,1]}
+JPM = {
+  'dividend': 4 * 3.027 * 10**9,
+  'netIncome': 46.503 * 10**9,
+  'numShares': 3.027 * 10**9,
+  'divRate': .111,
+  'startEquity': 279.354 * 10**9,
+  'endEquity': 294.127 * 10**9,
+  'price': 158.35,
+  'hist': [0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 0.9, 1, 1, 1, 1, 1]
+}
 
-KO = {'dividend' : 7.252*10**9, 'netIncome' : 9.771*10**9, 'numShares': 4.34*10**9, 'divRate' : .04, 'startEquity' : 21.284*10**9, 'endEquity' : 24.86*10**9, 'price' : 57.9069, 'hist' : [0.41, 0.41, 0.41, 0.41, 0.42, 0.42, 0.42, 0.42, 0.44, 0.44,0.44]}
+KO = {
+  'dividend': 7.252 * 10**9,
+  'netIncome': 9.771 * 10**9,
+  'numShares': 4.34 * 10**9,
+  'divRate': .04,
+  'startEquity': 21.284 * 10**9,
+  'endEquity': 24.86 * 10**9,
+  'price': 57.9069,
+  'hist': [0.41, 0.41, 0.41, 0.41, 0.42, 0.42, 0.42, 0.42, 0.44, 0.44, 0.44]
+}
 
 #print("ddm sum price model of KO: ", ddmSumPrice(KO))
 
@@ -21,8 +40,12 @@ KO = {'dividend' : 7.252*10**9, 'netIncome' : 9.771*10**9, 'numShares': 4.34*10*
 
 #print("JPM rating from ddmRater: ", ddmRater(JPM))
 
+callOption = Option("AMD", "call", 56, 3.10)
+putOption = Option("AMD", "put", 55, 0.97)
 
-callOption = Option("call", 58, 6.50)
-putOption = Option("put", 60, 4.60)
 
-strangleVisualization(callOption, putOption)
+
+#callOption.printProfitCurve()
+#putOption.printProfitCurve()
+
+strangleVisualization(callOption, putOption, 48, 60)
