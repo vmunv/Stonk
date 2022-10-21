@@ -1,5 +1,5 @@
 import matplotlib.pyplot as plt
-
+import math
 
 #call/put are option objects
 #start/end are integers
@@ -24,6 +24,11 @@ def strangleVisualization(call, put, start, end):
             "," + str(call.premium) + ")\nPut: (" + str(put.strike) + "," +
             str(put.premium) + ")")
   plt.plot(stockPrices, profits)
+  plt.text((start+end)/2,
+           max(profits) - 1,
+           "Profit range: [0," + str(put.strike - totalPremium) + "), (" +
+           str(call.strike + totalPremium) + ", infty)",
+           fontsize=9, horizontalalignment = 'center')
   plt.xlabel("Stock price ($)")
   plt.ylabel("Profit ($)")
   plt.show()
