@@ -51,7 +51,7 @@ for i in range(len(stockList)):
 
   df = getStockDF(ticker)
   
-  df.to_csv("test_data/"+ticker+"test_data.csv", index=False)
+  df.to_csv("test_data/"+ticker+"test_data.csv")
   
   if i % 5 == 4 and i != len(stockList) - 1:
     # Wait one minute after making 5 calls
@@ -66,4 +66,4 @@ putOption = Option("AMD", "put", 55, 0.97)
 #callOption.printProfitCurve()
 #putOption.printProfitCurve()
 
-strangleVisualization(callOption, putOption, 48, 66)
+#strangleVisualization(callOption, putOption, 48, 66)
