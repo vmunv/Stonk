@@ -3,6 +3,7 @@ from dividendDiscountModel import *
 from dividendDiscountModelRater import *
 from optionsVisualization import *
 from optionClass import *
+import time
 
 JPM = {
   'dividend': 4 * 3.027 * 10**9,
@@ -40,12 +41,29 @@ KO = {
 
 #print("JPM rating from ddmRater: ", ddmRater(JPM))
 
+#for ticker in stockList:
+#  print(getStockDF(ticker))
+
+#print(getStockDF('AAPL'))
+
+for i in range(len(stockList)):
+  ticker = stockList[i]
+
+  df = getStockDF(ticker)
+  
+  df.to_csv("test_data/"+ticker+"test_data.csv", index=False)
+  
+  if i % 5 == 4 and i != len(stockList) - 1:
+    # Wait one minute after making 5 calls
+    time.sleep(60)
+  
+
 callOption = Option("AMD", "call", 56, 3.10)
 putOption = Option("AMD", "put", 55, 0.97)
 
 
 
-callOption.printProfitCurve()
-putOption.printProfitCurve()
+#callOption.printProfitCurve()
+#putOption.printProfitCurve()
 
 strangleVisualization(callOption, putOption, 48, 66)

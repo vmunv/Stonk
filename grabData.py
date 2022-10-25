@@ -1,12 +1,43 @@
 import yfinance as yf
+from polygon import RESTClient
+import pandas as pd
+
+api_key = 'YwkLX7WPkOSqUS4CTt_kRJp0pCJBz8gG'
+
+client = RESTClient(api_key)
+print(client)
 
 #Create list of stocks
 with open('stockList.txt') as f:
   stockList = f.readlines()
   stockList = [stock.rstrip() for stock in stockList]
-print(stockList)
+print("stockList: ", stockList)
 
 indicators = {stock: [] for stock in stockList}
+
+#####################
+# Using polygon api #
+#####################
+
+
+def getStockDF(ticker):
+  minuteData = client.get_aggs(ticker,
+                                           multiplier=1,
+                                           timespan='minute',
+                                           from_='2022-09-01',
+                                           to='2022-09-02')
+  #print(resp)
+  #return 1
+  df = pd.DataFrame(minuteData)
+  df['Date'] = df['timestamp'].apply(lambda x: pd.to_datetime(x*1000000))
+  df = df.set_index('Date')
+  #df['date'] = pd.to_datetime(df['t'], unit='ms')
+  return df
+
+
+################
+# Using YF api #
+################
 
 
 def getStockPrice(ticker):
