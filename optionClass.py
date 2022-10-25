@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
 import math
+from grabData import *
 
 
 class Option:
@@ -9,6 +10,9 @@ class Option:
     self.strike = strike
     self.type = type
     self.premium = premium
+
+  def getStockPrice(self):
+    return getStockPrice(self.ticker)
 
   #x is price
   def profitCurve(self, x):

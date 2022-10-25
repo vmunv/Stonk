@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import math
 
+
 #call/put are option objects
 #start/end are integers
 def strangleVisualization(call, put, start, end):
@@ -20,15 +21,21 @@ def strangleVisualization(call, put, start, end):
     profits.append(call.profitCurve(i) + put.profitCurve(i))
     i += 0.5
     #print("Profit for price ", i, ": ", call.profitCurve(i) + put.profitCurve(i))
+  lowBound = put.strike - totalPremium
+  highBound = call.strike + totalPremium
   plt.title("Strangle on " + call.ticker + "\nCall: (" + str(call.strike) +
             "," + str(call.premium) + ")\nPut: (" + str(put.strike) + "," +
             str(put.premium) + ")")
   plt.plot(stockPrices, profits)
-  plt.text((start+end)/2,
-           max(profits) - 1,
-           "Profit range: [0," + str(put.strike - totalPremium) + "), (" +
-           str(call.strike + totalPremium) + ", infty)",
-           fontsize=9, horizontalalignment = 'center')
+  plt.text(
+    (start + end) / 2,
+    max(profits) - 1,
+    "Profit range: [0," + str(lowBound) + "), (" + str(highBound) +
+    ", infty)" + "\nBreak even: " +
+    str(round(100 * (lowBound / call.getStockPrice() - 1), 2)) + "% , " +
+    str(round(100 * (highBound / call.getStockPrice() - 1), 2)) + "%",
+    fontsize=9,
+    horizontalalignment='center')
   plt.xlabel("Stock price ($)")
   plt.ylabel("Profit ($)")
   plt.show()

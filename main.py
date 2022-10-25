@@ -45,7 +45,7 @@ putOption = Option("AMD", "put", 55, 0.97)
 
 
 
-#callOption.printProfitCurve()
-#putOption.printProfitCurve()
+callOption.printProfitCurve()
+putOption.printProfitCurve()
 
 strangleVisualization(callOption, putOption, 48, 66)
